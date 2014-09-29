@@ -1,5 +1,5 @@
 {
-    "name": "exp4php",
+    "name": "vavrecan/exp4php",
     "type": "library",
     "version": "1.0.0",
     "description": "exp4php math expression evaluator",

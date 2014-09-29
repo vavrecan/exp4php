@@ -1,0 +1,24 @@
+{
+    "name": "exp4php",
+    "type": "library",
+    "version": "1.0.0",
+    "description": "exp4php math expression evaluator",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Marek Vavrecan",
+            "email": "vavrecan@gmail.com"
+        },
+        {
+            "name": "Marek Vavrecan"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": [
+            "exp4php/ExpressionBuilder.php"
+        ]
+    }
+}

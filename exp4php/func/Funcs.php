@@ -59,7 +59,6 @@ class Funcs {
 
 class AbsFunc extends Func {
     public function apply($args) {
-        var_dump($args);
         return abs($args[0]);
     }
 }

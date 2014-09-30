@@ -57,8 +57,20 @@ class ExpressionBuilder {
         return $this;
     }
 
+    public function funcs($functions) {
+        foreach ($functions as $function)
+            $this->func($function);
+        return $this;
+    }
+
     public function variable($variableName) {
         $this->variableNames[] = $variableName;
+        return $this;
+    }
+
+    public function variables($variables) {
+        foreach ($variables as $variableName)
+            $this->variable($variableName);
         return $this;
     }
 
@@ -72,6 +84,13 @@ class ExpressionBuilder {
         $this->userOperators[$operator->getSymbol()] = $operator;
         return $this;
     }
+
+    public function operators($operators) {
+        foreach ($operators as $operator)
+            $this->operator($operator);
+        return $this;
+    }
+
 
     private function checkOperatorSymbol($op) {
         $name = $op->getSymbol();

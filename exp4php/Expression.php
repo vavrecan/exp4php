@@ -17,6 +17,7 @@
  */
 namespace exp4php;
 
+require_once("ExpressionException.php");
 require_once("Stack.php");
 require_once("ValidationResult.php");
 require_once("operator/Operator.php");
@@ -57,7 +58,7 @@ class Expression {
 
     public function checkVariableName($name) {
         if (array_key_exists($name, $this->userFunctionNames)) {
-            throw new \InvalidArgumentException("The setVariable name '" . $name . "' is invalid. Since there exists a function with the same name");
+            throw new ExpressionException("The setVariable name '" . $name . "' is invalid. Since there exists a function with the same name");
         }
     }
 
@@ -131,7 +132,7 @@ class Expression {
                 $name = $t->getName();
 
                 if (!isset($this->variables[$name])) {
-                    throw new \InvalidArgumentException("No value has been set for the setVariable '" . $name . "'.");
+                    throw new ExpressionException("No value has been set for the setVariable '" . $name . "'.");
                 }
 
                 $value = $this->variables[$name];
@@ -139,7 +140,7 @@ class Expression {
             } else if ($t->getType() == Token::TOKEN_OPERATOR) {
                 $op = $t;
                 if ($output->size() < $op->getOperator()->getNumOperands()) {
-                    throw new \InvalidArgumentException("Invalid number of operands available");
+                    throw new ExpressionException("Invalid number of operands available");
                 }
                 if ($op->getOperator()->getNumOperands() == 2) {
                     /* pop the operands and push the result of the operation */
@@ -156,11 +157,11 @@ class Expression {
                 $func = $t;
 
                 if ($func->getFunction()->getNumArguments() > $func->getPassedArgumentCount()){
-                    throw new \InvalidArgumentException("Function " . $func->getFunction()->getName() . " requires at least " . $func->getFunction()->getNumArguments() . " arguments (" . $func->getPassedArgumentCount() . " passed)");
+                    throw new ExpressionException("Function " . $func->getFunction()->getName() . " requires at least " . $func->getFunction()->getNumArguments() . " arguments (" . $func->getPassedArgumentCount() . " passed)");
                 }
 
                 if ($output->size() < $func->getFunction()->getNumArguments()) {
-                    throw new \InvalidArgumentException("Invalid number of arguments available");
+                    throw new ExpressionException("Invalid number of arguments available");
                 }
 
                 /* collect the arguments from the stack */
@@ -173,7 +174,7 @@ class Expression {
         }
 
         if ($output->size() > 1) {
-            throw new \InvalidArgumentException("Invalid number of items on the output queue. Might be caused by an invalid number of arguments for a function.");
+            throw new ExpressionException("Invalid number of items on the output queue. Might be caused by an invalid number of arguments for a function.");
         }
         return $output->pop();
     }

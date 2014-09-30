@@ -17,6 +17,7 @@
  */
 namespace exp4php\shuntingyard;
 
+use exp4php\ExpressionException;
 use exp4php\Stack;
 use exp4php\tokenizer\Token;
 use exp4php\tokenizer\Tokenizer;
@@ -64,7 +65,7 @@ class ShuntingYard {
                     $output[] = $stack->pop();
                 }
                 if ($stack->isEmpty() || $stack->peek()->getType() != Token::TOKEN_PARENTHESES_OPEN) {
-                    throw new \InvalidArgumentException("Misplaced function separator ',' or mismatched parentheses");
+                    throw new ExpressionException("Misplaced function separator ',' or mismatched parentheses");
                 }
                 break;
             case Token::TOKEN_OPERATOR:
@@ -96,13 +97,13 @@ class ShuntingYard {
                 }
                 break;
             default:
-                throw new \InvalidArgumentException("Unknown Token type encountered. This should not happen");
+                throw new ExpressionException("Unknown Token type encountered. This should not happen");
             }
         }
         while (!$stack->isEmpty()) {
             $t = $stack->pop();
             if ($t->getType() == Token::TOKEN_PARENTHESES_CLOSE || $t->getType() == Token::TOKEN_PARENTHESES_OPEN) {
-                throw new \InvalidArgumentException("Mismatched parentheses detected. Please check the expression");
+                throw new ExpressionException("Mismatched parentheses detected. Please check the expression");
             } else {
                 $output[] = $t;
             }

@@ -17,6 +17,8 @@
  */
 namespace exp4php\operator;
 
+use exp4php\ExpressionException;
+
 class Operators {
     const INDEX_ADDITION = 0;
     const INDEX_SUBTRACTION = 1;
@@ -104,7 +106,7 @@ class MutliplicationOperator extends Operator {
 class DivisionOperator extends Operator {
     public function apply($args) {
         if ($args[1] == 0)
-            throw new \InvalidArgumentException("Division by zero!");
+            throw new ExpressionException("Division by zero!");
         return $args[0] / $args[1];
     }
 }
@@ -118,7 +120,7 @@ class PowerOperator extends Operator {
 class ModuloOperator extends Operator {
     public function apply($args) {
         if ($args[1] == 0)
-            throw new \InvalidArgumentException("Division by zero!");
+            throw new ExpressionException("Division by zero!");
         return $args[0] % $args[1];
     }
 }

@@ -17,6 +17,7 @@
  */
 namespace exp4php\tokenizer;
 
+use exp4php\ExpressionException;
 use exp4php\func\Funcs;
 use exp4php\operator\Operator;
 use exp4php\operator\Operators;
@@ -101,7 +102,7 @@ class Tokenizer {
             return $this->parseFunctionOrVariable();
 
         }
-        throw new \InvalidArgumentException("Unable to parse char '" . $ch . "' (Code:" . (int)$ch . ") at [" . $this->pos . "]");
+        throw new ExpressionException("Unable to parse char '" . $ch . "' (Code:" . (int)$ch . ") at [" . $this->pos . "]");
     }
 
     private function parseArgumentSeparatorToken($ch) {
@@ -158,7 +159,7 @@ class Tokenizer {
             $len++;
         }
         if ($lastValidToken == null) {
-            throw new \InvalidArgumentException("Unable to parse setVariable or function starting at pos " . $this->pos . " in expression '" . $this->expression . "'");
+            throw new ExpressionException("Unable to parse setVariable or function starting at pos " . $this->pos . " in expression '" . $this->expression . "'");
         }
         $this->pos += $lastValidLen;
         $this->lastToken = $lastValidToken;

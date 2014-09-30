@@ -39,7 +39,7 @@ class ExpressionBuilder {
      */
     public function __construct($expression) {
         if ($expression == null || strlen(trim($expression)) == 0) {
-            throw new \InvalidArgumentException("Expression can not be empty");
+            throw new ExpressionException("Expression can not be empty");
         }
         $this->expression = $expression;
         $this->userOperators = [];
@@ -77,7 +77,7 @@ class ExpressionBuilder {
         $name = $op->getSymbol();
         foreach (str_split($name) as $ch) {
             if (!Operator::isAllowedOperatorChar($ch)) {
-                throw new \InvalidArgumentException("The operator symbol '" . $name . "' is invalid");
+                throw new ExpressionException("The operator symbol '" . $name . "' is invalid");
             }
         }
     }
@@ -88,7 +88,7 @@ class ExpressionBuilder {
      */
     public function build() {
         if ($this->expression == null || strlen(trim($this->expression)) == 0) {
-            throw new \InvalidArgumentException("The expression can not be empty");
+            throw new ExpressionException("The expression can not be empty");
         }
         return new Expression(ShuntingYard::convertToRPN($this->expression, $this->userFunctions, $this->userOperators, $this->variableNames),
                 array_keys($this->userFunctions));

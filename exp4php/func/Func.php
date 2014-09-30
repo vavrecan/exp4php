@@ -16,6 +16,7 @@
  * limitations under the License.
  */
 namespace exp4php\func;
+use exp4php\ExpressionException;
 
 /**
  * A class representing a Function which can be used in an expression
@@ -32,11 +33,11 @@ abstract class Func {
      */
     public function __construct($name, $numArguments = 1) {
         if ($numArguments < 0) {
-            throw new \InvalidArgumentException("The number of function arguments can not be less than 0 for '" . $name . "'");
+            throw new ExpressionException("The number of function arguments can not be less than 0 for '" . $name . "'");
         }
 
         if (!$this->isValidFunctionName($name)) {
-            throw new \InvalidArgumentException("The function name '" . $name  . "' is invalid");
+            throw new ExpressionException("The function name '" . $name  . "' is invalid");
         }
 
         $this->name = $name;

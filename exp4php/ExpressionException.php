@@ -15,32 +15,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-namespace exp4php\tokenizer;
-use exp4php\ExpressionException;
+namespace exp4php;
 
-/**
- * Represents an operator used in expressions
- */
-class OperatorToken extends Token {
-    private $operator;
+class ExpressionException extends \Exception {
 
-    /**
-     * Create a new instance
-     * @param string $op the operator
-     */
-    public function __construct($op) {
-        parent::__construct(Token::TOKEN_OPERATOR);
-        if ($op == null) {
-            throw new ExpressionException("Operator is unknown for token.");
-        }
-        $this->operator = $op;
-    }
-
-    /**
-     * Get the operator for that token
-     * @return string the operator
-     */
-    public function getOperator() {
-        return $this->operator;
-    }
 }

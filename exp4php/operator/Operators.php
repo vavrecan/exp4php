@@ -75,53 +75,53 @@ class Operators {
 
 class AdditionOperator extends Operator {
     public function apply($args) {
-        return $args[0] + $args[1];
+        return (float) $args[0] + (float) $args[1];
     }
 }
 
 class SubtractionOperator extends Operator {
     public function apply($args) {
-        return $args[0] - $args[1];
+        return (float) $args[0] - (float) $args[1];
     }
 }
 
 class UnaryMinusOperator extends Operator {
     public function apply($args) {
-        return -$args[0];
+        return - (float) $args[0];
     }
 }
 
 class UnaryPlusOperator extends Operator {
     public function apply($args) {
-        return $args[0];
+        return (float) $args[0];
     }
 }
 
 class MutliplicationOperator extends Operator {
     public function apply($args) {
-        return $args[0] * $args[1];
+        return (float) $args[0] * (float) $args[1];
     }
 }
 
 class DivisionOperator extends Operator {
     public function apply($args) {
-        if ($args[1] == 0)
+        if ((float) $args[1] == 0)
             throw new ExpressionException("Division by zero!");
-        return $args[0] / $args[1];
+        return (float) $args[0] / (float) $args[1];
     }
 }
 
 class PowerOperator extends Operator {
     public function apply($args) {
-        return pow($args[0], $args[1]);
+        return pow((float) $args[0], (float) $args[1]);
     }
 }
 
 class ModuloOperator extends Operator {
     public function apply($args) {
-        if ($args[1] == 0)
+        if ((float) $args[1] == 0)
             throw new ExpressionException("Division by zero!");
-        return $args[0] % $args[1];
+        return (float) $args[0] % (float) $args[1];
     }
 }
 

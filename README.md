@@ -11,3 +11,4 @@ Check out http://www.objecthunter.net/exp4j/
 ## Author
 - Frank Asseg - original exp4j library
 - [Marek Vavrecan](mailto:vavrecan@gmail.com) - this PHP port
+- [Donate](https://paypal.me/vavrecan)
